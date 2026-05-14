@@ -1,7 +1,7 @@
 export default class MainGameScene extends Phaser.Scene {
   constructor() {
 
-    super("main-game");
+    super("MainGameScene");
   }
 
     init() {
@@ -9,3 +9,5 @@ export default class MainGameScene extends Phaser.Scene {
         
 
     }
+
+  }
