@@ -12,5 +12,6 @@ export default class MainGameScene extends Phaser.Scene {
 
     create() {
     this.add.image(960, 540, "sky");
+    this.Personaje = new Personaje(this, 100, 450, 'Personaje');
     }
 }
