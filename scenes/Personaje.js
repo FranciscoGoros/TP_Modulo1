@@ -7,9 +7,8 @@ export default class Personaje extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
 
         scene.physics.add.existing(this);
-
+        this.setMaxVelocity(300, 600);
         this.setCollideWorldBounds(true);
-
         this.vida = 3;
         this.velocidad = 100;
 

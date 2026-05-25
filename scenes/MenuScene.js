@@ -30,10 +30,6 @@ export default class MenuScene extends Phaser.Scene {
     rectangle_button.on("pointerdown", () => {
       this.scene.start("MainGameScene");
     });
-
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
   }
 }
 
