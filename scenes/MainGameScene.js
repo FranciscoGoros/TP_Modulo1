@@ -1,4 +1,7 @@
-import Personaje from "../scenes/Personaje.js";
+import Personaje from "./Personaje.js";
+import { SpawnFiguras } from "./SpawnFiguras.js";
+import { Timer } from "./Timer.js";
+import { Verificar } from "./Verificar.js";
 
 export default class MainGameScene extends Phaser.Scene {
   constructor() {
@@ -7,7 +10,7 @@ export default class MainGameScene extends Phaser.Scene {
 
   init() {
     this.inventarioItems = []; 
-    this.tiempoRestante = 30; 
+    this.tiempo = 30; 
   }
 
   preload() {
@@ -26,7 +29,7 @@ export default class MainGameScene extends Phaser.Scene {
     this.personaje = new Personaje(this, 900, 800, 'Jugador');
     
     this.plataformas = this.physics.add.staticGroup();
-    
+
     this.plataformas.create(960, 1050, 'Plataforma');
 
     this.physics.add.collider(this.personaje, this.plataformas);
@@ -34,7 +37,7 @@ export default class MainGameScene extends Phaser.Scene {
     this.itemsRecolectables = this.physics.add.group();
 
     this.textoContador = this.add.text(16, 16, 'Items: C:0 | T:0 | R:0', { fontSize: '24px', fill: '#fff' });
-    this.textoTimer = this.add.text(784, 16, `Tiempo: ${this.tiempoRestante}`, { fontSize: '24px', fill: '#fff' }).setOrigin(1, 0);
+    this.textoTimer = this.add.text(1900, 16, `Tiempo: ${this.tiempo}`, { fontSize: '24px', fill: '#fff' }).setOrigin(1, 0);
 
     this.physics.add.collider(this.itemsRecolectables, this.plataformas);
 
@@ -42,61 +45,27 @@ export default class MainGameScene extends Phaser.Scene {
     this.physics.add.overlap(this.personaje, this.itemsRecolectables, (personaje, item) => {
         this.inventarioItems.push(item.texture.key);
         item.destroy();
-        this.actualizarInterfaz();
-        this.verificarCondicionVictoria();
+        this.Interfaz();
+        Verificar(this);
     }, null, this);
 
-    this.time.addEvent({ delay: 1000, callback: this.actualizarTimer, callbackScope: this, loop: true });
+    this.time.addEvent({ delay: 1000, callback: () => Timer(this), callbackScope: this, loop: true });
 
     this.time.addEvent({
         delay: 1000,
-        callback: this.generarItemAleatorio,
+        callback: () => SpawnFiguras(this),
         callbackScope: this,
         loop: true
     });
   }
 
-  generarItemAleatorio() {
-    const x = Phaser.Math.Between(50, 1850);
-    const tipos = ['Cuadrado', 'Triangulo', 'Rombo'];
-    const tipoSeleccionado = Phaser.Utils.Array.GetRandom(tipos);
-
-    const item = this.itemsRecolectables.create(x, 0, tipoSeleccionado);
-    item.setBounce(Phaser.Math.FloatBetween(0.1, 0.3));
-    item.setCollideWorldBounds(true);
-  }
-
-  actualizarInterfaz() {
+Interfaz() {
     const cuadrados = this.inventarioItems.filter(tipo => tipo === 'Cuadrado').length;
     const triangulos = this.inventarioItems.filter(tipo => tipo === 'Triangulo').length;
     const rombos = this.inventarioItems.filter(tipo => tipo === 'Rombo').length;
 
-    this.textoContador.setText(`Items: Cuadrados: ${cuadrados}/2 | Triángulos: ${triangulos}/2 | Rombos: ${rombos}/2`);
-  }
-
-  verificarCondicionVictoria() {
-    const cuadrados = this.inventarioItems.filter(tipo => tipo === 'Cuadrado').length;
-    const triangulos = this.inventarioItems.filter(tipo => tipo === 'Triangulo').length;
-    const rombos = this.inventarioItems.filter(tipo => tipo === 'Rombo').length;
-
-    if (cuadrados >= 2 && triangulos >= 2 && rombos >= 2) {
-        this.scene.start('VictoryScene', { 
-            mensaje: "¡Misión Cumplida!",
-            totalRecolectado: this.inventarioItems.length 
-        });
-    }
-  }
-
-  actualizarTimer() {
-    this.tiempoRestante--;
-    this.textoTimer.setText(`Tiempo: ${this.tiempoRestante}`);
-
-    if (this.tiempoRestante <= 0) {
-        this.scene.start('Victoria', { 
-            mensaje: "¡¡¡FINAL!!!!",
-            totalRecolectado: this.inventarioItems.length 
-        });
-    }
+    this.textoContador.setText(`Items: C: ${cuadrados}/2 | T: ${triangulos}/2 | R: ${rombos}/2`);
   }
 }
+
 

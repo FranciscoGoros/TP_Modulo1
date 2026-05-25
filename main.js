@@ -21,11 +21,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-<<<<<<< Updated upstream
-      gravity: { y: 200 },
-=======
       gravity: { y: 700 },
->>>>>>> Stashed changes
       debug: true,
     },
   },
