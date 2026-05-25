@@ -12,21 +12,21 @@ export default class Personaje extends Phaser.Physics.Arcade.Sprite {
         this.vida = 3;
         this.velocidad = 100;
 
+        this.teclas = scene.input.keyboard.createCursorKeys();
+    }
 
-        preUpdate(time, delta) 
-        {
+    preUpdate (time, delta) {
         super.preUpdate(time, delta);
 
         if (this.teclas.left.isDown) {
-            this.setVelocityX(-160);
+            this.setVelocityX(-360);
         } else if (this.teclas.right.isDown) {
-            this.setVelocityX(160);
+            this.setVelocityX(360);
         } else {
             this.setVelocityX(0);
         }
         if (this.teclas.up.isDown && this.body.touching.down) {
             this.setVelocityY(-330);
-            }
-        }
+         }
     }
 }
