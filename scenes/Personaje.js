@@ -7,10 +7,10 @@ export default class Personaje extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
 
         scene.physics.add.existing(this);
-        this.setMaxVelocity(300, 600);
+        this.setMaxVelocity(600, 600);
         this.setCollideWorldBounds(true);
         this.vida = 3;
-        this.velocidad = 100;
+        this.velocidad = 300;
 
         this.teclas = scene.input.keyboard.createCursorKeys();
     }
@@ -19,14 +19,14 @@ export default class Personaje extends Phaser.Physics.Arcade.Sprite {
         super.preUpdate(time, delta);
 
         if (this.teclas.left.isDown) {
-            this.setVelocityX(-360);
+            this.setVelocityX(-4010);
         } else if (this.teclas.right.isDown) {
-            this.setVelocityX(360);
+            this.setVelocityX(4010);
         } else {
             this.setVelocityX(0);
         }
         if (this.teclas.up.isDown && this.body.touching.down) {
-            this.setVelocityY(-330);
+            this.setVelocityY(-760);
          }
     }
 }
