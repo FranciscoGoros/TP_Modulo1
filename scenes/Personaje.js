@@ -27,6 +27,7 @@ export default class Personaje extends Phaser.Physics.Arcade.Sprite {
         }
         if (this.teclas.up.isDown && this.body.touching.down) {
             this.setVelocityY(-1100);
+            this.scene.sound.play('salto', { volume: 0.1 });
          }
     }
 }

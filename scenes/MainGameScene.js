@@ -21,6 +21,7 @@ export default class MainGameScene extends Phaser.Scene {
   }
 
   preload() {
+    this.load.audio('salto', './public/assets/sounds/JUMPSOUND.ogg');
     this.load.image("sky", "./public/assets/Fondos/sky2.png");
     this.load.image('Plataforma', './public/assets/Plataforma.png');
     this.load.image('Jugador', './public/assets/Personaje.png');
