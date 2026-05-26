@@ -21,7 +21,7 @@ export default class MainGameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("sky", "./public/assets/Fondos/Sky.png");
+    this.load.image("sky", "./public/assets/Fondos/sky2.png");
     this.load.image('Plataforma', './public/assets/Plataforma.png');
     this.load.image('Jugador', './public/assets/Personaje.png');
 
@@ -43,12 +43,14 @@ export default class MainGameScene extends Phaser.Scene {
     this.plataformas.create(960, 1050, 'Plataforma');
     this.plataformas.create(2050, 850, 'Plataforma');
     this.plataformas.create(-200, 500, 'Plataforma');
+    this.plataformas.create(2600, 500, 'Plataforma');
+    this.plataformas.create(-2600, 700, 'Plataforma');
     this.physics.add.collider(this.personaje, this.plataformas);
 
     this.itemsRecolectables = this.physics.add.group();
 
-    this.textoContador = this.add.text(16, 16, 'Items: C / 0 | T / 0 | R / 0', { fontSize: '24px', fill: '#fff' });
-    this.textoTimer = this.add.text(1900, 16, `Tiempo: ${this.tiempo}`, { fontSize: '24px', fill: '#fff' }).setOrigin(1, 0);
+    this.textoContador = this.add.text(16, 16, 'Items: C / 0 | T / 0 | R / 0', { fontSize: '34px', fill: '#fff' });
+    this.textoTimer = this.add.text(1900, 16, `Tiempo: ${this.tiempo}`, { fontSize: '34px', fill: '#fff' }).setOrigin(1, 0);
 
     this.physics.add.collider(this.itemsRecolectables, this.plataformas, (obj1, obj2) => {
         
@@ -57,16 +59,13 @@ export default class MainGameScene extends Phaser.Scene {
         const item = (obj1.texture !== undefined) ? obj1 : obj2;
 
         if (item) {
-            // Si la figura no tiene la propiedad 'rebotes' todavía, se la creamos en 0
-            if (item.rebotes === undefined) {
-                item.rebotes = 0;
+            if (item.bounce === undefined) {
+                item.bounce = 0;
             }
+            // Acá se resta el valor, pero salta bastantes veces así que hay que ser rápido.
+            item.valor -= 5;
 
-            // Sumamos un rebote
-            item.rebotes += 1;
-
-            // Al tercer rebote contra la plataforma, la figura se destruye (sea piedra o no)
-            if (item.rebotes >= 3) {
+            if (item.valor <= 0) {
                 item.destroy();
             }
         }

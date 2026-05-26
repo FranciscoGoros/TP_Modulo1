@@ -1,7 +1,7 @@
 const Phaser = window.Phaser;
 
 export function SpawnFiguras(scene) {
-    const x = Phaser.Math.Between(50, 1850);
+    const x = Phaser.Math.Between(0, 1850);
     const tipos = ['Cuadrado', 'Triangulo', 'Rombo', 'Piedra'];
     const tipoSeleccionado = Phaser.Utils.Array.GetRandom(tipos);
 
