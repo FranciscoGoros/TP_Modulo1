@@ -7,17 +7,21 @@ export function Verificar(scene) {
     const rombos = scene.inventarioItems.filter(tipo => tipo === 'Rombo').length;
 
 
+    
 
     if (scene.puntaje > 100) {
+        scene.sound.play('win', { volume: 0.1 });
         scene.scene.start("End", { 
-            mensaje: "GANASTE",
+            mensaje: "WIN!!!!!!!!!!!!!!!!!!",
             total: scene.inventarioItems.length,
             puntaje: scene.puntaje
+
         });
         return; 
     }
 
-    if (scene.tiempo <= 0 && (cuadrados < 2 || triangulos < 2 || rombos < 2 || scene.puntaje < 100)) {
+    if (scene.tiempo <= 0) {
+        scene.sound.play('lose', { volume: 0.1 });
         scene.scene.start("End", { 
             mensaje: "PERDISTE",
             total: scene.inventarioItems.length,
