@@ -21,7 +21,7 @@ export default class MenuScene extends Phaser.Scene {
     this.add.image(960, 540, "menu");
     const logo = this.add.image(960, 450, "logo");
     const rectangle_button = this.add.rectangle(960, 800, 300, 100, 0x08888).setOrigin(0.5);
-    const button = this.add.text(960, 800, "Start Game", {
+    const button = this.add.text(960, 800, "Comenzar", {
       fontSize: "48px",
       fill: "#000000",
     }).setOrigin(0.5);
