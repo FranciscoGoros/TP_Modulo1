@@ -24,7 +24,7 @@ export default class MainGameScene extends Phaser.Scene {
     this.load.audio('salto', './public/assets/sounds/JUMPSOUND.ogg');
     this.load.audio('win', './public/assets/sounds/win.mp3');
     this.load.audio('lose', './public/assets/sounds/lose.mp3');
-    this.load.image("sky", "./public/assets/sky2.png");
+    this.load.image("sky", "./public/assets/Sky2.png");
     this.load.image('Plataforma', './public/assets/Plataforma.png');
     this.load.image('Jugador', './public/assets/Personaje.png');
 
@@ -74,7 +74,7 @@ export default class MainGameScene extends Phaser.Scene {
         }
     });
 
-    this.textoPuntaje = this.add.text(16, 50, 'Puntaje: 0', { fontSize: '32px', fill: '#ffff00' });
+    this.textoPuntaje = this.add.text(16, 60, 'Puntaje: 0', { fontSize: '40px', fill: '#ffff00' });
 
     // Daba muchos errores pero esto al menos anda ahora
 
@@ -108,7 +108,7 @@ Interfaz() {
     const triangulos = this.inventarioItems.filter(tipo => tipo === 'Triangulo').length;
     const rombos = this.inventarioItems.filter(tipo => tipo === 'Rombo').length;
 
-    this.textoContador.setText(`Items: C ${cuadrados}/2 | T ${triangulos}/2 | R ${rombos}/2`);
+    this.textoContador.setText(`Items: C ${cuadrados} / 2 | T ${triangulos} / 2 | R ${rombos} / 2`);
   }
 }
 

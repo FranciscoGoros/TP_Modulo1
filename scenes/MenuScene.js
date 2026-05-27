@@ -13,7 +13,7 @@ export default class MenuScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("menu", "./public/assets/sky.png");
+    this.load.image("menu", "./public/assets/Sky.png");
     this.load.image("logo", "./public/assets/Texto/Ninja-Moncho-Logo.png");
   }
 
