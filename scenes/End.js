@@ -1,5 +1,5 @@
 const Phaser = window.Phaser;
-
+// Pantalla de final
 export default class End extends Phaser.Scene {
     constructor() {
         super("End");

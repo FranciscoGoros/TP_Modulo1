@@ -1,4 +1,5 @@
 const Phaser = window.Phaser;
+// Acá está la logica de movimiento y demás cuestiones
 
 export default class Personaje extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture) {
